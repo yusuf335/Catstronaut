@@ -38,5 +38,6 @@ For more information on GraphQL and React, check out the following resources:
 
 - [GraphQL Documentation](https://graphql.org/learn/)
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Mock data](https://odyssey-lift-off-rest-api.herokuapp.com/docs/)
 
 Happy coding!
