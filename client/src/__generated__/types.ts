@@ -22,6 +22,18 @@ export type Author = {
   photo?: Maybe<Scalars['String']['output']>;
 };
 
+export type IncrementTrackViewsResponse = {
+  __typename?: 'IncrementTrackViewsResponse';
+  /** Similar to HTTP status code, represents the status of the mutation */
+  code: Scalars['Int']['output'];
+  /** Human-readable message for the UI */
+  message: Scalars['String']['output'];
+  /** Indicates whether the mutation was successful */
+  success: Scalars['Boolean']['output'];
+  /** Newly updated track after a successful mutation */
+  track?: Maybe<Track>;
+};
+
 export type Module = {
   __typename?: 'Module';
   id: Scalars['ID']['output'];
@@ -29,6 +41,16 @@ export type Module = {
   length?: Maybe<Scalars['Int']['output']>;
   /** The module's title */
   title: Scalars['String']['output'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  incrementTrackViews: IncrementTrackViewsResponse;
+};
+
+
+export type MutationIncrementTrackViewsArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Query = {
@@ -64,6 +86,13 @@ export type Track = {
   /** The track's title */
   title: Scalars['String']['output'];
 };
+
+export type IncrementTrackViewsMutationVariables = Exact<{
+  incrementTrackViewsId: Scalars['ID']['input'];
+}>;
+
+
+export type IncrementTrackViewsMutation = { __typename?: 'Mutation', incrementTrackViews: { __typename?: 'IncrementTrackViewsResponse', code: number, success: boolean, message: string, track?: { __typename?: 'Track', id: string, numberOfViews?: number | null } | null } };
 
 export type GetTrackQueryVariables = Exact<{
   trackId: Scalars['ID']['input'];
