@@ -7,7 +7,7 @@ import Pages from "./pages";
 const root = createRoot(document.getElementById("root")!);
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri: "https://backend-production-d3ed.up.railway.app/",
   cache: new InMemoryCache(),
 });
 
