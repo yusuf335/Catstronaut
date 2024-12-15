@@ -1,8 +1,8 @@
 ## Project Overview
 
-[Demo](https://catstronaut-blog.up.railway.app/)
-
 CatsTronauts is a full-stack application that demonstrates the use of GraphQL with a React frontend and a Node.js backend. This project serves as a learning resource for building and integrating GraphQL APIs with modern web applications.
+
+## [Demo](https://catstronaut-blog.up.railway.app/)
 
 ## Prerequisites
 
