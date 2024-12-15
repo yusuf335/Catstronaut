@@ -1,22 +1,40 @@
-# Use the latest LTS version of Node.js
-FROM node:20-alpine
- 
-# Set the working directory inside the container
+# Use the Node alpine official image
+# https://hub.docker.com/_/node
+FROM node:lts-alpine AS build
+
+# Set config
+ENV NPM_CONFIG_UPDATE_NOTIFIER=false
+ENV NPM_CONFIG_FUND=false
+
+# Create and change to the app directory.
 WORKDIR /app
- 
-# Copy package.json and package-lock.json
+
+# Copy the files to the container image
 COPY package*.json ./
-COPY public/ ./public
-COPY src/ ./src
- 
-# Install dependencies
-RUN npm install
- 
-# Copy the rest of your application files
-COPY . .
- 
-# Expose the port your app runs on
-EXPOSE 3000
- 
-# Define the command to run your app
-CMD ["npm", "start"]
+
+# Install packages
+RUN npm ci
+
+# Copy local code to the container image.
+COPY . ./
+
+# Build the app.
+RUN npm run build
+
+# Use the Caddy image
+FROM caddy
+
+# Create and change to the app directory.
+WORKDIR /app
+
+# Copy Caddyfile to the container image.
+COPY Caddyfile ./
+
+# Copy local code to the container image.
+RUN caddy fmt Caddyfile --overwrite
+
+# Copy files to the container image.
+COPY --from=build /app/dist ./dist
+
+# Use Caddy to run/serve the app
+CMD ["caddy", "run", "--config", "Caddyfile", "--adapter", "caddyfile"]
